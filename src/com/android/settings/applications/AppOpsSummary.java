@@ -43,8 +43,10 @@ public class AppOpsSummary extends Fragment {
     // layout inflater object used to inflate views
     private LayoutInflater mInflater;
 
-    private ViewGroup mContentContainer;
-    private View mRootView;
+    @SuppressWarnings("unused")
+	private ViewGroup mContentContainer;
+    @SuppressWarnings("unused")
+	private View mRootView;
     private ViewPager mViewPager;
 
     CharSequence[] mPageNames;
@@ -70,7 +72,8 @@ public class AppOpsSummary extends Fragment {
             return new AppOpsCategory(sPageTemplates[position]);
         }
 
-        @Override
+        @SuppressWarnings("deprecation")
+		@Override
         public int getCount() {
             int count = sPageTemplates.length;
             if (AppOpsManagerWrapper.OP_BOOT_COMPLETED == -1) {

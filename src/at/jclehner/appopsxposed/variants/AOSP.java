@@ -74,7 +74,7 @@ public class AOSP extends ApkVariant
 
 		log("Hooking onBuildHeaders :-(");
 
-		XposedHelpers.findAndHookMethod("com.android.settings.Settings", lpparam.classLoader,
+		XposedHelpers.findAndHookMethod("android.preference.PreferenceActivity", lpparam.classLoader,
 				"onBuildHeaders", List.class, new XC_MethodHook() {
 					@SuppressWarnings("unchecked")
 					@Override
@@ -85,7 +85,6 @@ public class AOSP extends ApkVariant
 		});
 	}
 
-	@SuppressWarnings("RawTypes")
 	private void addAppOpsDashboardTile(LoadPackageParam lpparam) throws Throwable
 	{
 		final Class<?> tileClazz = lpparam.classLoader.loadClass(
@@ -97,6 +96,7 @@ public class AOSP extends ApkVariant
 		XposedHelpers.findAndHookMethod("com.android.settings.SettingsActivity",
 				lpparam.classLoader, "loadCategoriesFromResource", int.class, List.class,
 				new XC_MethodHook() {
+					@SuppressWarnings("unchecked")
 					@Override
 					protected void afterHookedMethod(MethodHookParam param) throws Throwable
 					{
@@ -130,7 +130,7 @@ public class AOSP extends ApkVariant
 										}
 										else if(i == 1)
 										{
-											((List) XposedHelpers.getObjectField(category, "tiles"))
+											((List<Object>) XposedHelpers.getObjectField(category, "tiles"))
 													.add(0, tile);
 										}
 										else

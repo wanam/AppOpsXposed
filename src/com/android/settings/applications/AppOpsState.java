@@ -46,6 +46,7 @@ import at.jclehner.appopsxposed.util.AppOpsManagerWrapper.OpEntryWrapper;
 import at.jclehner.appopsxposed.util.AppOpsManagerWrapper.PackageOpsWrapper;
 import at.jclehner.appopsxposed.util.OpsLabelHelper;
 
+@SuppressWarnings("deprecation")
 public class AppOpsState {
     static final String TAG = "AppOpsState";
     static final boolean DEBUG = false;
@@ -748,7 +749,8 @@ public class AppOpsState {
         return false;
     }
 
-    private static int opToSwitch(int op)
+    @SuppressWarnings("unused")
+	private static int opToSwitch(int op)
     {
         // TODO Implement something like expert mode?
 

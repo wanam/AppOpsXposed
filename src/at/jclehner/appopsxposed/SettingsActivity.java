@@ -49,7 +49,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
-
 import at.jclehner.appopsxposed.util.AppOpsManagerWrapper;
 import at.jclehner.appopsxposed.util.OpsLabelHelper;
 import at.jclehner.appopsxposed.util.Util;
@@ -135,6 +134,7 @@ public class SettingsActivity extends Activity
 	{
 		private SharedPreferences mPrefs;
 
+		@SuppressWarnings("deprecation")
 		@Override
 		public void onCreate(Bundle savedInstanceState)
 		{

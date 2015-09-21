@@ -19,11 +19,7 @@
 package at.jclehner.appopsxposed.hacks;
 
 import java.lang.reflect.Array;
-import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import android.Manifest;
@@ -36,12 +32,10 @@ import android.os.Bundle;
 import at.jclehner.appopsxposed.Hack;
 import at.jclehner.appopsxposed.R;
 import at.jclehner.appopsxposed.util.AppOpsManagerWrapper;
-import at.jclehner.appopsxposed.util.Constants;
 import at.jclehner.appopsxposed.util.OpsLabelHelper;
 import at.jclehner.appopsxposed.util.Res;
 import at.jclehner.appopsxposed.util.Util;
 import de.robv.android.xposed.XC_MethodHook;
-import de.robv.android.xposed.XC_MethodHook.MethodHookParam;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
 import de.robv.android.xposed.callbacks.XC_LoadPackage.LoadPackageParam;
@@ -375,7 +369,6 @@ public class BootCompletedHack extends Hack
 	{
 		try
 		{
-			removeBootCompletedFromTemplates(lpparam);
 
 			final Class<?> pagerAdapterClazz = lpparam.classLoader.loadClass(
 					"com.android.settings.applications.AppOpsSummary$MyPagerAdapter");
@@ -431,64 +424,6 @@ public class BootCompletedHack extends Hack
 			debug(t);
 		}
 	}
-
-	private void removeBootCompletedFromTemplates(LoadPackageParam lpparam)
-	{
-		if(true)
-			return;
-
-		try
-		{
-			final Class<?> opsTemplateClazz = lpparam.classLoader.loadClass(
-					"com.android.settings.applications.AppOpsState$OpsTemplate");
-
-			XposedHelpers.findAndHookConstructor(opsTemplateClazz,
-					int[].class, boolean[].class, new XC_MethodHook() {
-
-						@Override
-						protected void beforeHookedMethod(MethodHookParam param) throws Throwable
-						{
-							try
-							{
-								final int oldLength = Array.getLength(param.args[0]);
-								if(oldLength == 1)
-									return;
-
-								final int[] newOps = new int[oldLength - 1];
-								boolean wasItemRemoved = false;
-								for(int i = 0, k = 0; i != oldLength; ++i, ++k)
-								{
-									final int op = Array.getInt(param.args[0], i);
-									if(op == OP_BOOT_COMPLETED)
-									{
-										wasItemRemoved = true;
-										--k;
-										continue;
-									}
-										if(k < newOps.length)
-										newOps[k] = op;
-									else
-										break;
-								}
-								if(wasItemRemoved)
-								{
-									log("OP_BOOT_COMPLETED removed from " + param.thisObject);
-									param.args[0] = newOps;
-								}
-							}
-							catch(Throwable t)
-							{
-								debug(t);
-							}
-						}
-			});
-		}
-		catch(Throwable t)
-		{
-			debug(t);
-		}
-	}
-
 
 	/*
 	private void patchVibratorService(ClassLoader classLoader) throws Throwable

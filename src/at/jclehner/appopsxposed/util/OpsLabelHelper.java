@@ -29,7 +29,6 @@ import android.content.res.Resources;
 import android.content.res.Resources.NotFoundException;
 import android.util.Log;
 import android.util.SparseArray;
-import at.jclehner.appopsxposed.AppOpsXposed;
 import at.jclehner.appopsxposed.R;
 
 public class OpsLabelHelper

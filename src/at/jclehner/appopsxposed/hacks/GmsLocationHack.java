@@ -26,6 +26,7 @@ import java.util.Set;
 
 import android.app.AppOpsManager;
 import android.content.Context;
+import at.jclehner.appopsxposed.BuildConfig;
 import at.jclehner.appopsxposed.Hack;
 import at.jclehner.appopsxposed.util.AppOpsManagerWrapper;
 import at.jclehner.appopsxposed.util.Util;
@@ -38,8 +39,9 @@ import de.robv.android.xposed.callbacks.XC_LoadPackage.LoadPackageParam;
 
 public class GmsLocationHack extends Hack
 {
-	private static final boolean DEBUG = true;
+	private static final boolean DEBUG = BuildConfig.DEBUG;
 
+	@SuppressWarnings("unused")
 	private static final int RESULT_SUCCESS = 0;
 
 	private static final int[] LOCATION_OPS = {

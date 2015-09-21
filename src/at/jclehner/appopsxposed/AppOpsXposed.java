@@ -20,8 +20,6 @@ package at.jclehner.appopsxposed;
 
 import static at.jclehner.appopsxposed.util.Util.log;
 import android.content.res.XModuleResources;
-import android.os.StrictMode;
-
 import at.jclehner.appopsxposed.util.Constants;
 import at.jclehner.appopsxposed.util.Res;
 import at.jclehner.appopsxposed.util.Util;
@@ -40,7 +38,7 @@ public class AppOpsXposed implements IXposedHookZygoteInit, IXposedHookLoadPacka
 {
 	public static final String MODULE_PACKAGE = AppOpsXposed.class.getPackage().getName();
 	public static final String SETTINGS_PACKAGE = "com.android.settings";
-	public static final String SETTINGS_MAIN_ACTIVITY = SETTINGS_PACKAGE + ".Settings";
+	public static final String SETTINGS_MAIN_ACTIVITY = "android.preference.PreferenceActivity";
 	public static final String APP_OPS_FRAGMENT = "com.android.settings.applications.AppOpsSummary";
 	public static final String APP_OPS_DETAILS_FRAGMENT = "com.android.settings.applications.AppOpsDetails";
 

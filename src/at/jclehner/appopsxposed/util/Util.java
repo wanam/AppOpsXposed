@@ -29,7 +29,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Set;
-
+import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.AppOpsManager;
@@ -50,9 +50,7 @@ import android.view.ViewGroup;
 import at.jclehner.appopsxposed.AppOpsActivity;
 import at.jclehner.appopsxposed.BuildConfig;
 import at.jclehner.appopsxposed.LauncherActivity;
-
 import com.android.settings.applications.AppOpsDetails;
-
 import dalvik.system.DexFile;
 import de.robv.android.xposed.callbacks.XC_LoadPackage.LoadPackageParam;
 import eu.chainfire.libsuperuser.Shell.SU;
@@ -113,7 +111,7 @@ public final class Util
 	}
 
 	public static boolean containsManufacturer(String str) {
-		return Build.MANUFACTURER.toLowerCase(Locale.US).contains(str.toLowerCase());
+		return Build.MANUFACTURER.toLowerCase(Locale.ENGLISH).contains(str.toLowerCase(Locale.ENGLISH));
 	}
 
 	public static String getAoxVersion(Context context)
@@ -186,6 +184,8 @@ public final class Util
 		return intent;
 	}
 
+	@SuppressLint("WorldReadableFiles")
+	@SuppressWarnings("deprecation")
 	public static SharedPreferences getSharedPrefs(Context context)
 	{
 		return context.getSharedPreferences(context.getPackageName() + "_preferences",

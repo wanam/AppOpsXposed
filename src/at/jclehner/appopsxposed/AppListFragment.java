@@ -210,6 +210,7 @@ public class AppListFragment extends ListFragment implements LoaderCallbacks<Lis
 	{
 		private static String[] sOpPerms = getOpPermissions();
 
+		@SuppressWarnings("unused")
 		private final AppOpsState mState;
 		private final PackageManager mPm;
 		private List<PackageInfoData> mData;
@@ -346,6 +347,7 @@ public class AppListFragment extends ListFragment implements LoaderCallbacks<Lis
 			return hasUnchangedOps;
 		}
 
+		@SuppressWarnings("unused")
 		private boolean hasAppOps(PackageInfo info)
 		{
 			if(info.requestedPermissions != null)

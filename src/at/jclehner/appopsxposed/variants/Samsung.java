@@ -18,23 +18,9 @@
 
 package at.jclehner.appopsxposed.variants;
 
-import java.lang.reflect.Field;
-import java.util.Arrays;
-
-import android.content.ComponentName;
-import android.content.Context;
-import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.preference.PreferenceActivity;
-import android.preference.PreferenceActivity.Header;
 import at.jclehner.appopsxposed.ApkVariant;
 import at.jclehner.appopsxposed.AppOpsXposed;
 import at.jclehner.appopsxposed.util.Res;
-import at.jclehner.appopsxposed.util.Util;
-import at.jclehner.appopsxposed.util.XUtils;
-import de.robv.android.xposed.XC_MethodHook;
-import de.robv.android.xposed.XposedBridge;
-import de.robv.android.xposed.XposedHelpers;
 import de.robv.android.xposed.callbacks.XC_LoadPackage.LoadPackageParam;
 
 public class Samsung extends ApkVariant

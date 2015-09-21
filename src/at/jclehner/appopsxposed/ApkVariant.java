@@ -36,7 +36,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.MenuItem.OnMenuItemClickListener;
 import android.widget.Toast;
-
 import at.jclehner.appopsxposed.util.Constants;
 import at.jclehner.appopsxposed.util.Res;
 import at.jclehner.appopsxposed.util.Util;
@@ -52,12 +51,9 @@ import at.jclehner.appopsxposed.variants.Sony;
 import de.robv.android.xposed.IXposedHookInitPackageResources;
 import de.robv.android.xposed.IXposedHookLoadPackage;
 import de.robv.android.xposed.XC_MethodHook;
-import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
 import de.robv.android.xposed.callbacks.XC_InitPackageResources.InitPackageResourcesParam;
 import de.robv.android.xposed.callbacks.XC_LoadPackage.LoadPackageParam;
-
-import static at.jclehner.appopsxposed.util.Util.log;
 
 /**
  * Describes a variant of the Settings.apk file.
@@ -312,7 +308,7 @@ public abstract class ApkVariant implements IXposedHookLoadPackage, IXposedHookI
 	}
 
 	protected final void hookLoadHeadersFromResource(LoadPackageParam lpparam, int hookResId, int addAfterHeaderId) throws Throwable {
-		hookLoadHeadersFromResource(lpparam, "com.android.settings.Settings", new int[]{hookResId}, addAfterHeaderId);
+		hookLoadHeadersFromResource(lpparam, "android.preference.PreferenceActivity", new int[]{hookResId}, addAfterHeaderId);
 	}
 
 	protected final void hookLoadHeadersFromResource(LoadPackageParam lpparam, String className, XC_MethodHook hook) throws Throwable
@@ -326,6 +322,7 @@ public abstract class ApkVariant implements IXposedHookLoadPackage, IXposedHookI
 		XposedHelpers.findAndHookMethod("com.android.settings.applications.InstalledAppDetails", lpparam.classLoader,
 				"onCreateOptionsMenu", Menu.class, MenuInflater.class, new XC_MethodHook() {
 
+					@SuppressWarnings("deprecation")
 					@Override
 					protected void afterHookedMethod(final MethodHookParam param) throws Throwable
 					{

@@ -1,9 +1,8 @@
 package at.jclehner.appopsxposed.util;
 
-import de.robv.android.xposed.XSharedPreferences;
 import android.content.res.XModuleResources;
 import at.jclehner.appopsxposed.AppOpsXposed;
-import at.jclehner.appopsxposed.R;
+import de.robv.android.xposed.XSharedPreferences;
 
 public class Res
 {

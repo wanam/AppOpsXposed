@@ -25,10 +25,8 @@ import android.app.AppOpsManager;
 import android.content.Context;
 import android.os.Binder;
 import android.os.Build;
-import android.os.Build.VERSION;
-import android.os.Build.VERSION_CODES;
 import android.os.IBinder;
-import android.os.WorkSource;
+import at.jclehner.appopsxposed.BuildConfig;
 import at.jclehner.appopsxposed.Hack;
 import at.jclehner.appopsxposed.util.AppOpsManagerWrapper;
 import at.jclehner.appopsxposed.util.Res;
@@ -45,7 +43,7 @@ public class FixWakeLock extends Hack
 	public static final FixWakeLock INSTANCE = new FixWakeLock();
 
 	private static final boolean ENABLE_PER_TAG_FILTERING = false;
-	private static final boolean DEBUG = false;
+	private static final boolean DEBUG = BuildConfig.DEBUG;
 
 	private Set<Unhook> mUnhooks;
 

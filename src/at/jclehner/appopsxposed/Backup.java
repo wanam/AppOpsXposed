@@ -1,23 +1,23 @@
 package at.jclehner.appopsxposed;
 
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.List;
+import java.util.Locale;
+
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserException;
+import org.xmlpull.v1.XmlSerializer;
+
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.os.Environment;
 import android.text.TextUtils;
 import android.util.Log;
 import android.util.Xml;
-
-import org.xmlpull.v1.XmlPullParser;
-import org.xmlpull.v1.XmlPullParserException;
-import org.xmlpull.v1.XmlSerializer;
-
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.util.List;
-
 import at.jclehner.appopsxposed.util.AppOpsManagerWrapper;
 import at.jclehner.appopsxposed.util.ObjectWrapper;
 import at.jclehner.appopsxposed.util.Util;
@@ -85,9 +85,9 @@ public class Backup
 					final String opName = expectAttribute(xml, "n");
 					String modeName = expectAttribute(xml, "m");
 
-					final int op = AppOpsManagerWrapper.opFromName(opName.toUpperCase());
+					final int op = AppOpsManagerWrapper.opFromName(opName.toUpperCase(Locale.ENGLISH));
 					final int mode = translateMode(packageName, modeName);
-					modeName = AppOpsManagerWrapper.modeToName(mode).toLowerCase();
+					modeName = AppOpsManagerWrapper.modeToName(mode).toLowerCase(Locale.ENGLISH);
 
 					if(AppOpsManagerWrapper.isValidOp(op) && mode != -1)
 					{
@@ -164,8 +164,8 @@ public class Backup
 							}
 
 							xml.startTag(null, "op");
-							xml.attribute(null, "n", AppOpsManagerWrapper.opToName(op).toLowerCase());
-							xml.attribute(null, "m", AppOpsManagerWrapper.modeToName(mode).toLowerCase());
+							xml.attribute(null, "n", AppOpsManagerWrapper.opToName(op).toLowerCase(Locale.ENGLISH));
+							xml.attribute(null, "m", AppOpsManagerWrapper.modeToName(mode).toLowerCase(Locale.ENGLISH));
 							xml.endTag(null, "op");
 						}
 					}
@@ -280,7 +280,7 @@ public class Backup
 
 	private static int translateMode(String pkg, String modeName)
 	{
-		final String fieldName = "MODE_" + modeName.toUpperCase();
+		final String fieldName = "MODE_" + modeName.toUpperCase(Locale.ENGLISH);
 		final int mode = ObjectWrapper.getStatic(AppOpsManagerWrapper.class, fieldName, -1);
 		if(mode == -1)
 		{
@@ -305,6 +305,11 @@ public class Backup
 
 	static class ParseException extends RuntimeException
 	{
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 6475409843015610299L;
+
 		ParseException(XmlPullParser xml, String message)
 		{
 			super("XML:" + xml.getLineNumber() + ":" + xml.getColumnNumber() + ": " + message);

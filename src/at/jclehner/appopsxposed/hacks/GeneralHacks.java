@@ -18,21 +18,17 @@
 
 package at.jclehner.appopsxposed.hacks;
 
-import android.os.Build;
-
 import java.util.HashMap;
 import java.util.Map;
-import java.util.jar.Manifest;
 
+import android.os.Build;
 import at.jclehner.appopsxposed.AppOpsXposed;
 import at.jclehner.appopsxposed.Hack;
 import at.jclehner.appopsxposed.util.AppOpsManagerWrapper;
 import at.jclehner.appopsxposed.util.Constants;
-import at.jclehner.appopsxposed.util.XUtils;
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
-import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import de.robv.android.xposed.callbacks.XC_LoadPackage.LoadPackageParam;
 
 
